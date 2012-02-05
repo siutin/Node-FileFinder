@@ -22,9 +22,8 @@ var NodeFinder = function(options){
 			function(error,stdout,stderr){
 				//console.log(stdout);
 				self.db = self.lsParser.toDictionary(stdout) || null;
-
+				self.settings.preloaded = true;
 				callback(self,self.db);
-				//settings.preloaded = true;
 		});
 	}else{
 		callback(self,this.db);
@@ -84,7 +83,6 @@ NodeFinder.prototype._find = function(selector){
 
 NodeFinder.prototype.find = function(selector,callback){
 	var settings = this.settings;
-
 	if(!settings.preloaded){
 		this.start(function(finder){
 			var result = finder._find(selector);
