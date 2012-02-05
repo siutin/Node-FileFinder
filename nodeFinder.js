@@ -21,7 +21,7 @@ var NodeFinder = function(options){
 		exec("ls -R -A -l " + settings.startfrom + " | grep -v ^d",
 			function(error,stdout,stderr){
 				//console.log(stdout);
-				self.db = self.lsParser.toList(stdout) || null;
+				self.db = self.lsParser.toDictionary(stdout) || null;
 
 				callback(self,self.db);
 				//settings.preloaded = true;
