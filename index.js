@@ -2,7 +2,7 @@ var exec = require("child_process").exec;
 var _ = require("underscore");
 var LsParser =  require("./lib/lsParser").LsParser;
 
-var NodeFinder = function(options){
+var NodeFileFinder = function(options){
 	var _options = options || {};
 	var settings = this.settings = { 
 			preloaded: false
@@ -14,7 +14,7 @@ var NodeFinder = function(options){
 	this.db = null;
 };
 
- NodeFinder.prototype.start = function(callback){
+ NodeFileFinder.prototype.start = function(callback){
  	var self = this;
  	var settings = this.settings;
 	if(!settings.preloaded){
@@ -30,7 +30,7 @@ var NodeFinder = function(options){
 	}
 };
 
-NodeFinder.prototype._nameFilter = function(fileName){
+NodeFileFinder.prototype._nameFilter = function(fileName){
 	var db = this.db;
 	var query = _.filter(db,function(record){ 
 		return record.name == fileName;
@@ -38,14 +38,14 @@ NodeFinder.prototype._nameFilter = function(fileName){
 	return query;
 }
 
-NodeFinder.prototype._typeFilter = function(typeName){
+NodeFileFinder.prototype._typeFilter = function(typeName){
 	var db = this.db;
 	var query = _.filter(db,function(record){ 
 		return record.type == typeName;
 	});
 	return query;
 }
-NodeFinder.prototype._pathFilter = function(path){
+NodeFileFinder.prototype._pathFilter = function(path){
 	if(!_.isArray(path)) return;
 	
 	var db = this.db;
@@ -58,7 +58,7 @@ NodeFinder.prototype._pathFilter = function(path){
 	return query;
 };
 
-NodeFinder.prototype._find = function(selector){
+NodeFileFinder.prototype._find = function(selector){
 	if(_.isNull(selector) || _.isUndefined(selector) ||  _.isEmpty(selector)) return this;
 	
 	if(_.isString(selector)){
@@ -83,7 +83,7 @@ NodeFinder.prototype._find = function(selector){
 	}
 };
 
-NodeFinder.prototype.find = function(selector,callback){
+NodeFileFinder.prototype.find = function(selector,callback){
 	var settings = this.settings;
 	if(!settings.preloaded){
 		this.start(function(finder){
@@ -98,4 +98,4 @@ NodeFinder.prototype.find = function(selector,callback){
 
 
 
-exports.NodeFinder = NodeFinder;
+exports.NodeFileFinder = NodeFileFinder;
