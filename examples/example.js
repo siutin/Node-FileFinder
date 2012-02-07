@@ -1,7 +1,7 @@
 var ut = require("./utilities");
 var NodeFileFinder = require("./../").NodeFileFinder;
 
-var startfrom = "~/nodefinder";
+var startfrom = "~";
 var nodeFileFinder  = new NodeFileFinder({startfrom: startfrom});
 nodeFileFinder.start(function(finder,db){
 
