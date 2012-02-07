@@ -1,16 +1,16 @@
 var ut = require("./utilities");
-var NodeFinder = require("./../nodeFinder").NodeFinder;
+var NodeFileFinder = require("./../").NodeFileFinder;
 
-var startfrom = "~/";
-var nodeFinder  = new NodeFinder({startfrom: startfrom});
-nodeFinder.start(function(finder,db){
+var startfrom = "~/nodefinder";
+var nodeFileFinder  = new NodeFileFinder({startfrom: startfrom});
+nodeFileFinder.start(function(finder,db){
 
 	var result;
-	console.log("// find *.png  ---- >");
+	console.log("// find *.index  ---- >");
 
-	console.time("#findpng");
-	result = nodeFinder.find(".png");
-	console.timeEnd("#findpng");
+	console.time("#find index");
+	result = finder.find(".js");
+	console.timeEnd("#find index");
 	
-	ut.showResult(result);
+	console.log(JSON.stringify(result));
 });
