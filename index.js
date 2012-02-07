@@ -1,6 +1,17 @@
+
+/*
+ * index.js: Top level include for the Node-FileFinder module
+ *
+ * (C) 2012 SiuTin (twitter.com/osiutino)
+ *
+ * MIT LICENCE
+ *
+ */
+ 
 var exec = require("child_process").exec;
 var _ = require("underscore");
 var LsParser =  require("./lib/lsParser").LsParser;
+
 
 var NodeFileFinder = function(options){
 	var _options = options || {};
@@ -14,18 +25,21 @@ var NodeFileFinder = function(options){
 	this.db = null;
 };
 
- NodeFileFinder.prototype.start = function(callback){
+
+NodeFileFinder.prototype.start = function(callback){
  	var self = this;
  	var settings = this.settings;
 	if(!settings.preloaded){
+		// Recurisely get files content from base driectory by executing command.
 		exec("ls -R -A -l " + settings.startfrom + " | grep -v ^d",
 			function(error,stdout,stderr){
-				//console.log(stdout);
+				// Using a lsParser to transform the content to a Dictionary as a cache.
 				self.db = self.lsParser.toDictionary(stdout) || null;
 				self.settings.preloaded = true;
 				callback(self,self.db);
 		});
 	}else{
+		// pickup the file from the cached dictionary.Fast way to perform find procedures.
 		callback(self,this.db);
 	}
 };
@@ -45,6 +59,7 @@ NodeFileFinder.prototype._typeFilter = function(typeName){
 	});
 	return query;
 }
+
 NodeFileFinder.prototype._pathFilter = function(path){
 	if(!_.isArray(path)) return;
 	
@@ -95,7 +110,6 @@ NodeFileFinder.prototype.find = function(selector,callback){
 		return result;
 	}
 };
-
 
 
 exports.NodeFileFinder = NodeFileFinder;
