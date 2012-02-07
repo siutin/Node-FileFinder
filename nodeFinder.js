@@ -30,6 +30,14 @@ var NodeFinder = function(options){
 	}
 };
 
+NodeFinder.prototype._nameFilter = function(fileName){
+	var db = this.db;
+	var query = _.filter(db,function(record){ 
+		return record.name == fileName;
+	});
+	return query;
+}
+
 NodeFinder.prototype._typeFilter = function(typeName){
 	var db = this.db;
 	var query = _.filter(db,function(record){ 
@@ -57,7 +65,7 @@ NodeFinder.prototype._find = function(selector){
 		switch(_.first(selector)){
 			//Find By Name
 			case "#":
-				console.log("findByName is not implemented.");
+				return this._nameFilter(_.rest(selector).join(''));
 				break;
 			//Find By Type
 			case ".":
@@ -72,12 +80,6 @@ NodeFinder.prototype._find = function(selector){
 		var name = options.name || null;
 		var type = options.type || null;
 		var path = options.path || null;
-		if(path != null){
-			//console.log("_pathFilter");
-			return this._pathFilter(path);
-		}
-		//if(type != null)
-		//	return this._typeFilter(type);
 	}
 };
 
