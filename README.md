@@ -1,12 +1,15 @@
-#Node-FileFinder
 
-a Node JS Library for searching files and return a array result.
- 
-#Setup
+# Deprecated
+
+# Node-FileFinder
+
+a Node JS Library for searching files and returning a array result.
+
+# Setup
 
 	npm install Node-FileFinder
 
-#Example
+# Example
 
 	// set the base directory
 	var nodeFileFinder  = new NodeFileFinder({startfrom: startfrom});
@@ -21,9 +24,9 @@ a Node JS Library for searching files and return a array result.
 
 	})
 
-#Result
+# Result
 After calling a find function , the result would be returned as below:
-	
+
 	[
       {
          "name":"nodeFinder",
@@ -45,15 +48,15 @@ After calling a find function , the result would be returned as below:
       ..
       ]
 
-#Methods
+# Methods
 
-##start(callback)
+## start(callback)
  	update soon
 
-##find(selector)
+## find(selector)
  	update soon
 
-## License 
+## License
 
 (The MIT License)
 
